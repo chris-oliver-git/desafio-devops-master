@@ -29,7 +29,11 @@ services:
             - MYSQL_ROOT_PASSWORD=root
         networks:
             - node-network
-
+            #incluída a localização da pasta mysql e da porta de comunicação
+        volumes:
+            -/var/lib/mysql
+        ports:
+            -"3306:3306"
     nginx:
         build:
             context: ./nginx
@@ -41,3 +45,8 @@ services:
             - node-network
         ports: 
             - "8080:80"
+
+        #incluído o parâmetro networks
+        Networks:
+            - node_network:
+                external: true
