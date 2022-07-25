@@ -15,11 +15,12 @@ services:
         depends_on:
             - db
         ports:
-            - "3306"
+            - "3306:3306"
 
     db:
         build:
-            context: ./mysql
+            dockerfile: 8.0-debian
+            context: .
         command: --innodb-use-native-aio=0
         container_name: db
         restart: always

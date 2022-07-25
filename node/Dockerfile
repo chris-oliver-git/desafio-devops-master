@@ -16,6 +16,6 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 #propriedades do shell para iniciar a instalação
-CMD["npm","run","start"]
+CMD ["npm","run","start"]
 
 EXPOSE 3000
