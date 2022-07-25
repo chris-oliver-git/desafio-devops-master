@@ -15,7 +15,7 @@ services:
         depends_on:
             - db
         ports:
-            - "3000:3000"
+            - "3306"
 
     db:
         build:
@@ -28,25 +28,26 @@ services:
             - MYSQL_DATABASE=node_db
             - MYSQL_ROOT_PASSWORD=root
         networks:
-            - node-network
+           - node-network
             #incluída a localização da pasta mysql e da porta de comunicação
         volumes:
-            -/var/lib/mysql
+            - /var/lib/mysql
         ports:
-            -"3306:3306"
+            - "3306:3306"
     nginx:
         build:
-            context: ./nginx
+        #incremento datag dockerfile
+            dockerfile: ./nginx
+            context: .
         image: javielrezende/nginx
         container_name: nginx
         depends_on:
             - app
-        networks: 
-            - node-network
         ports: 
-            - "8080:80"
-
-        #incluído o parâmetro networks
-        Networks:
-            - node_network:
-                external: true
+            - "8000:80"
+        networks:
+            - node-network
+#criando variavel node-network que estava faltando
+networks:
+    node-network:
+            driver: bridge
