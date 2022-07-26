@@ -13,11 +13,11 @@ routes.get('/', (_, res) => {
         let html = '<h1>Desafio Devops!</h1>';
 
         results.forEach(element => {
-            html += element.name + '<br>'
-        })
+            html += element.name + '<br>';
+        });
 
         return res.send(html);
     });
-})
+});
 
 module.exports = routes;

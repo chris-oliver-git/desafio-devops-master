@@ -11,16 +11,16 @@ services:
         volumes:
             - ./node:/usr/src/app
             - /usr/src/app/node_modules
+            
         tty: true
         depends_on:
             - db
         ports:
-            - "3306:3306"
+            - "3000:3000"
 
     db:
         build:
-            dockerfile: 8.0-debian
-            context: .
+            context: ./mysql
         command: --innodb-use-native-aio=0
         container_name: db
         restart: always
@@ -37,18 +37,17 @@ services:
             - "3306:3306"
     nginx:
         build:
-        #incremento datag dockerfile
-            dockerfile: ./nginx
-            context: .
+           context: ./nginx
         image: javielrezende/nginx
         container_name: nginx
         depends_on:
             - app
-        ports: 
-            - "8000:80"
         networks:
             - node-network
+        ports: 
+            - "8000:80"
+        
 #criando variavel node-network que estava faltando
 networks:
     node-network:
-            driver: bridge
+        driver: bridge
